@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排单表 - 海马体</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="schedule.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar (Collapsed style as per screenshot) -->
+        <aside class="sidebar collapsed">
+            <div class="sidebar-logo">
+                <i class="icon-seahorse"></i>
+            </div>
+            <div class="sidebar-icons">
+                <div class="icon-item"><i class="icon-home"></i></div>
+                <div class="icon-item active"><i class="icon-calendar"></i></div>
+                <div class="icon-item"><i class="icon-settings"></i></div>
+                <div class="icon-item"><i class="icon-chart"></i></div>
+                <div class="icon-item"><i class="icon-shop"></i></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="breadcrumb-info">
+                    <button class="btn-icon"><i class="icon-menu"></i></button>
+                    <span class="breadcrumb-tag">《无纸化拆单优化》</span>
+                    <a href="#" class="app-link">Mainto APP 图片</a>
+                    <i class="icon-info"></i>
+                </div>
+                <div class="user-info">
+                    <span>苏蓉 | 深圳万象天地店</span>
+                    <button class="btn-switch">切换门店</button>
+                    <button class="btn-logout">安全退出</button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Dashboard Cards -->
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">今日预约率</span>
+                            <i class="icon-camera blue"></i>
+                        </div>
+                        <div class="card-value">88%</div>
+                        <div class="card-footer">
+                            <span>开点: <span class="orange">243</span></span>
+                            <span>建议人均开点: <span class="orange">25-33</span></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">今日考核业绩 <i class="icon-eye-off"></i></span>
+                            <i class="icon-chart yellow"></i>
+                        </div>
+                        <div class="card-value">****</div>
+                        <div class="card-footer">
+                            <span>本月目标: <span class="orange">****</span></span>
+                            <span>达成率: <span class="orange">****</span></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">线下订单金额 <i class="icon-eye-off"></i></span>
+                            <i class="icon-card blue"></i>
+                        </div>
+                        <div class="card-value">**** <i class="icon-question"></i></div>
+                        <div class="card-footer">
+                            <span>订单数量: <span class="orange">****</span></span>
+                        </div>
+                    </div>
+                    <div class="card notification-card">
+                        <div class="card-header">
+                            <span class="card-title">动态通知</span>
+                            <div class="mascot-container">
+                                <i class="icon-mascot"></i>
+                            </div>
+                        </div>
+                        <div class="notification-content">
+                            <!-- User requested content -->
+                            <div class="notification-item">
+                                1-30 14:09 从容修改了排班开点计划，<a href="#" class="link-action">点击查看</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule Section -->
+                <div class="schedule-section">
+                    <!-- Controls -->
+                    <div class="schedule-controls">
+                        <div class="left-controls">
+                            <div class="date-selector">
+                                <button class="btn-arrow">&lt;</button>
+                                <span class="current-date">2026-01-30 周五</span>
+                                <button class="btn-arrow">&gt;</button>
+                            </div>
+                            <button class="btn-today">今天</button>
+                            <button class="btn-list">前置准备清单</button>
+                            <button class="btn-list">待确认订单 <span class="badge">3</span></button>
+                        </div>
+                        <div class="right-controls">
+                            <button class="btn-refresh"><i class="icon-refresh"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Filter & Legend -->
+                    <div class="schedule-filter-bar">
+                        <div class="status-info">
+                            <span>剩余点位: <span class="orange">22</span></span>
+                            <div class="toggle-switch">
+                                <span>隐藏未开点</span>
+                                <div class="switch active"></div>
+                            </div>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item"><span class="dot black"></span>未完成</div>
+                            <div class="legend-item"><span class="dot green"></span>已完成</div>
+                            <div class="legend-item"><span class="dot orange"></span>待支付</div>
+                            <div class="legend-item"><span class="dot teal"></span>占位</div>
+                            <div class="legend-item"><span class="dot pink"></span>关闭</div>
+                            <div class="legend-item"><span class="box empty"></span>空闲</div>
+                            <div class="legend-item"><span class="box strikethrough"></span>过期</div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Grid -->
+                    <div class="schedule-container-flex">
+                        <div class="schedule-sidebar">
+                            <div class="sidebar-header">
+                                预约<br>统计
+                                <i class="icon-arrow-down-circle"></i>
+                            </div>
+                            <div class="sidebar-body">
+                                <!-- Empty space to align with rows -->
+                            </div>
+                        </div>
+                        <div class="schedule-grid-container">
+                            <div class="time-header">
+                                <div class="time-labels">
+                                <span>10:00</span>
+                                <span>11:00</span>
+                                <span>12:00</span>
+                                <span>13:00</span>
+                                <span>14:00</span>
+                                <span>15:00</span>
+                                <span>16:00</span>
+                                <span>17:00</span>
+                                <span>18:00</span>
+                            </div>
+                        </div>
+                        <div class="grid-body">
+                            <!-- Rows will be simulated with HTML for visual representation -->
+                            <div class="grid-row">
+                                <div class="row-header"><span class="tag-blue">全能</span> 1</div>
+                                <div class="row-cells">
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell teal"></div>
+                                    <div class="cell black icon"><i class="icon-msg"></i></div><div class="cell pink"></div><div class="cell empty"></div>
+                                    <div class="cell icon"><i class="icon-msg"></i></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell empty"></div>
+                                    <div class="cell black"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                    <div class="cell black"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                    <div class="cell empty"></div><div class="cell black"></div><div class="cell empty"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                </div>
+                            </div>
+                            <div class="grid-row">
+                                <div class="row-header"><span class="tag-blue">全能</span> 2</div>
+                                <div class="row-cells">
+                                    <div class="cell icon"><i class="icon-user"></i></div><div class="cell black"></div><div class="cell teal"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell icon"><i class="icon-user"></i></div>
+                                    <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                    <div class="cell empty"></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell empty"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                </div>
+                            </div>
+                            <div class="grid-row">
+                                <div class="row-header"><span class="tag-blue">全能</span> 3</div>
+                                <div class="row-cells">
+                                    <div class="cell teal"></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell black"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell empty"></div>
+                                    <div class="cell black"></div><div class="cell teal"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell empty"></div>
+                                    <div class="cell empty"></div><div class="cell empty"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                </div>
+                            </div>
+                             <div class="grid-row">
+                                <div class="row-header"><span class="tag-blue">全能</span> 4</div>
+                                <div class="row-cells">
+                                    <div class="cell teal"></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell teal"></div>
+                                    <div class="cell teal"></div><div class="cell pink"></div><div class="cell pink"></div>
+                                    <div class="cell pink"></div><div class="cell strikethrough"></div><div class="cell strikethrough"></div>
+                                    <div class="cell black"></div><div class="cell black"></div><div class="cell empty"></div>
+                                    <div class="cell empty"></div><div class="cell black"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell black"></div>
+                                    <div class="cell teal"></div><div class="cell empty"></div><div class="cell empty"></div>
+                                    <div class="cell teal"></div><div class="cell teal"></div><div class="cell teal"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
