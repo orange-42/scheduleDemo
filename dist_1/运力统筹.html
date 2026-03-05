@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排班计划 - 海马体</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .city-plan-input {
+            border: 1px solid transparent;
+            background-color: transparent;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: none;
+        }
+        .city-plan-input:hover {
+            border: 1px solid #d9d9d9;
+            background-color: #fff;
+        }
+        .city-plan-input:focus {
+             border: 1px solid #1890ff;
+             background-color: #fff;
+             cursor: text;
+             outline: none;
+             box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+         }
+         /* Hide number input spinners for cleaner text look */
+         .city-plan-input::-webkit-outer-spin-button,
+         .city-plan-input::-webkit-inner-spin-button {
+             -webkit-appearance: none;
+             margin: 0;
+         }
+         .city-plan-input {
+             -moz-appearance: textfield;
+         }
+         /* Header styles for city plan to match operation calendar tags */
+        .city-header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+        .city-header-title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .city-header-subtitle {
+            font-size: 12px;
+            font-weight: normal;
+            color: #666;
+            margin-top: 4px;
+            white-space: nowrap;
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" style="display: block;">
+        <!-- Sidebar removed -->
+
+        <!-- Main Content -->
+        <main class="main-content" style="padding-left: 0;">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="version-info">
+                    <span class="tag">预发环境</span>
+                    <span>当前版本：01.29 11:07</span>
+                </div>
+                <div class="user-info">
+                    <span>史文娇 | 杭州临平银泰城店</span>
+                    <button class="btn-switch">切换门店</button>
+                    <button class="btn-logout">安全退出</button>
+                </div>
+            </header>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <!-- Operation Calendar Tab Removed -->
+                <!-- Product Limiting Tab Removed -->
+                <div class="tab-item active" id="tab-city-plan">运力统筹</div>
+            </div>
+            
+            <!-- Operation Calendar View Removed -->
+
+            <!-- Plan Settings View Removed -->
+
+            <!-- City Plan View (Default View) -->
+            <div class="calendar-container" id="city-plan-view" style="display: flex;">
+                <div class="city-plan-header" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                     <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="input-suffix-group">
+                            <input type="text" class="edit-input" placeholder="搜索门店..." style="width: 200px;">
+                        </div>
+                     </div>
+                     <div>
+                         <button class="btn-secondary" id="btn-activity-manage" style="margin-right: 10px;">活动管理</button>
+                         <button class="btn-primary" id="btn-batch-update-plan">导入近期目标点位</button>
+                     </div>
+                </div>
+
+                <div class="city-plan-table-container" style="background: #fff; border-radius: 4px; padding: 0; border: 1px solid #e8e8e8;">
+                    <table class="settings-table" id="city-plan-table" style="margin: 0;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">门店ID</th>
+                                <th style="text-align: left;">门店名称</th>
+                                <th style="text-align: center;">门店体量</th>
+                                <th style="text-align: center;">远期基本点位</th>
+                                <th style="text-align: center; width: 260px;">近期目标点位</th>
+                                <th style="text-align: center; width: 260px;">门店可调节点</th>
+                                <th style="width: 80px; text-align: center;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="city-plan-tbody-static">
+                            <!-- Row 1 -->
+                            <tr>
+                                <td>1001</td>
+                                <td>国贸旗舰店</td>
+                                <td>¥500,000</td>
+                                <td>48%</td>
+                                <td class="status-balanced" style="color: #006400; font-weight: bold;">超前</td>
+                                <td style="text-align: left; font-size: 0.85em;">
+                                     <div>• 开点率: 98%</div>
+                                     <div>• 预约率: 95%</div>
+                                     <div>• 化摄人效: ¥3,200</div>
+                                 </td>
+                                 <td style="text-align: left; font-size: 0.85em;">
+                                    <div>• 开点率: 90%</div>
+                                    <div>• 预约率: 85%</div>
+                                    <div style="color: #de350b;">• 化摄人效: ¥2,100 (偏低)</div>
+                                    <div style="margin-top:4px; font-weight:bold; color:#0052cc;">👉 建议: 优化周间排班，减少冗余人力</div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <div style="font-size: 12px; color: #666;">周一,周二,周三,周四,周五</div>
+                                </td>
+                                <td style="text-align: center;"><button class="btn-secondary btn-sm" onclick="openStoreEditModal(1001)" style="padding: 4px 8px; border: 1px solid #d9d9d9; background: #fff; border-radius: 4px; cursor: pointer;">高级设置</button></td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr>
+                                <td>1002</td>
+                                <td>三里屯概念店</td>
+                                <td>¥650,000</td>
+                                <td>38%</td>
+                                <td class="status-deficit" style="color: #de350b; font-weight: bold;">滞后</td>
+                                <td style="text-align: left; font-size: 0.85em;">
+                                     <div>• 开点率: 100%</div>
+                                     <div style="color: #de350b;">• 预约率: 60% (偏低)</div>
+                                     <div>• 化摄人效: ¥2,500</div>
+                                     <div style="margin-top:4px; font-weight:bold; color:#0052cc;">👉 建议: 强化高销量产品引流</div>
+                                 </td>
+                                 <td style="text-align: left; font-size: 0.85em;">
+                                    <div>• 开点率: 95%</div>
+                                    <div>• 预约率: 70%</div>
+                                    <div>• 化摄人效: ¥2,400</div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <div style="font-size: 12px; color: #666;">周一,周二,周三,周四,周五</div>
+                                </td>
+                                <td style="text-align: center;"><button class="btn-secondary btn-sm" onclick="openStoreEditModal(1002)" style="padding: 4px 8px; border: 1px solid #d9d9d9; background: #fff; border-radius: 4px; cursor: pointer;">高级设置</button></td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr>
+                                <td>1003</td>
+                                <td>朝阳大悦城店</td>
+                                <td>¥450,000</td>
+                                <td>44%</td>
+                                <td class="status-surplus" style="color: #ff8c00; font-weight: bold;">正常</td>
+                                <td style="text-align: left; font-size: 0.85em;">
+                                     <div style="color: #de350b;">• 开点率: 80% (偏低)</div>
+                                     <div style="color: #006644;">• 预约率: 98% (饱和)</div>
+                                     <div>• 化摄人效: ¥3,500</div>
+                                     <div style="margin-top:4px; font-weight:bold; color:#0052cc;">👉 建议: 及时增加开点，释放产能</div>
+                                 </td>
+                                 <td style="text-align: left; font-size: 0.85em;">
+                                    <div>• 开点率: 85%</div>
+                                    <div>• 预约率: 80%</div>
+                                    <div>• 化摄人效: ¥2,600</div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <div style="font-size: 12px; color: #666;">周一,周二,周三,周四,周五</div>
+                                </td>
+                                <td style="text-align: center;"><button class="btn-secondary btn-sm" onclick="openStoreEditModal(1003)" style="padding: 4px 8px; border: 1px solid #d9d9d9; background: #fff; border-radius: 4px; cursor: pointer;">高级设置</button></td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr>
+                                <td>1004</td>
+                                <td>西单主力店</td>
+                                <td>¥550,000</td>
+                                <td>50%</td>
+                                <td class="status-balanced" style="color: #006400; font-weight: bold;">超前</td>
+                                <td style="text-align: left; font-size: 0.85em;">
+                                     <div>• 开点率: 100%</div>
+                                     <div>• 预约率: 92%</div>
+                                     <div style="color: #de350b;">• 化摄人效: ¥2,000 (偏低)</div>
+                                     <div style="margin-top:4px; font-weight:bold; color:#0052cc;">👉 建议: 业绩虽好但人效低，需控制排班成本</div>
+                                 </td>
+                                 <td style="text-align: left; font-size: 0.85em;">
+                                    <div>• 开点率: 95%</div>
+                                    <div>• 预约率: 88%</div>
+                                    <div>• 化摄人效: ¥2,300</div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <div style="font-size: 12px; color: #666;">周一,周二,周三,周四,周五</div>
+                                </td>
+                                <td style="text-align: center;"><button class="btn-secondary btn-sm" onclick="openStoreEditModal(1004)" style="padding: 4px 8px; border: 1px solid #d9d9d9; background: #fff; border-radius: 4px; cursor: pointer;">高级设置</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js?v=6"></script>
+
+    <!-- Store Edit Modal (Merged Plan Settings) -->
+    <div id="store-edit-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="width: 900px; height: 90vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+                <h3>门店计划配置 - <span id="store-edit-name"></span></h3>
+                <button class="close-btn close-store-edit">×</button>
+            </div>
+            <div class="modal-body" id="store-edit-modal-body" style="background: #f0f2f5; padding: 20px; flex: 1; overflow-y: auto;">
+                <!-- Content injected by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-store-edit">取消</button>
+                <button id="btn-save-store-edit" class="btn-primary">保存配置</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Plan Edit Modal -->
+    <div id="daily-plan-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="width: 400px;">
+            <div class="modal-header">
+                <h3>调整单日排班</h3>
+                <button class="close-btn close-daily-plan">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>日期：</label>
+                    <div id="daily-plan-date" style="font-weight: 500;"></div>
+                </div>
+                <div class="form-group">
+                    <label>排数：</label>
+                    <input type="number" id="daily-plan-rows" class="edit-input" style="width: 100%;">
+                </div>
+                <div class="form-group">
+                    <label>工作时间：</label>
+                    <input type="text" id="daily-plan-time" class="edit-input" style="width: 100%;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-daily-plan">取消</button>
+                <button id="btn-save-daily-plan" class="btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Plan Edit Modal -->
+    <div id="batch-plan-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="width: 400px;">
+            <div class="modal-header">
+                <h3>批量调整本月排班</h3>
+                <button class="close-btn close-batch-plan">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-item">
+                    <label class="modal-form-label">调整对象：</label>
+                    <div class="modal-form-content">
+                        <div id="batch-plan-target" style="font-weight: 500; font-size: 14px; padding-top: 4px;"></div>
+                        <div class="modal-form-hint">将修改本月剩余日期中所有该星期日期的排班</div>
+                    </div>
+                </div>
+                <div class="modal-form-item">
+                    <label class="modal-form-label">排数：</label>
+                    <div class="modal-form-content">
+                        <input type="number" id="batch-plan-rows" class="edit-input" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="modal-form-item">
+                    <label class="modal-form-label">工作时间：</label>
+                    <div class="modal-form-content">
+                        <input type="text" id="batch-plan-time" class="edit-input" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="modal-form-item" style="margin-bottom: 0;">
+                    <div class="modal-form-label"></div>
+                    <div class="modal-form-content">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="batch-plan-overwrite">
+                            <label for="batch-plan-overwrite" style="font-weight: normal; cursor: pointer;">覆盖已有特殊设置</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-batch-plan">取消</button>
+                <button id="btn-save-batch-plan" class="btn-primary">应用调整</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- City Batch Settings Modal (New) -->
+    <div id="city-batch-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="width: 800px; height: 80vh;">
+            <div class="modal-header">
+                <h3>批量调整门店计划</h3>
+                <button class="close-btn close-city-batch">×</button>
+            </div>
+            <div class="modal-body" id="city-batch-modal-body" style="background: #f0f2f5; padding: 20px;">
+                <!-- Content injected by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-city-batch">取消</button>
+                <button id="btn-save-city-batch" class="btn-primary">保存配置</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Suggestion Modal -->
+    <div id="import-suggestion-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="width: 500px;">
+            <div class="modal-header">
+                <h3>导入近期目标点位</h3>
+                <button class="close-btn close-import-suggestion">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px; font-size: 14px; color: #666; background: #e6f7ff; border: 1px solid #91d5ff; padding: 10px; border-radius: 4px;">
+                    <i style="color: #1890ff; margin-right: 4px;">ℹ</i>
+                    若需按目标统一开点，请导入后前往‘高级设置’页配置应用需求
+                </div>
+                
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 500;">1. 下载导入模版</label>
+                    <button class="btn-secondary" id="btn-download-template" style="display: flex; align-items: center;">
+                        <i class="icon-download" style="margin-right: 5px;">⬇</i> 下载 Excel 模版
+                    </button>
+                    <div style="margin-top: 5px; font-size: 12px; color: #999;">
+                        需严格按模版填写，泳道类型仅限：全能、证件、功能、写真
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 500;">2. 上传文件</label>
+                    <div class="upload-area" id="upload-area" style="border: 2px dashed #d9d9d9; border-radius: 4px; padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.3s;">
+                        <div style="font-size: 24px; color: #999; margin-bottom: 8px;">📂</div>
+                        <div style="color: #666;">点击或拖拽文件到此处上传</div>
+                        <input type="file" id="file-input-suggestion" accept=".xlsx, .xls" style="display: none;">
+                        <div id="file-name-display" style="margin-top: 10px; color: #1890ff; display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-import-suggestion">取消</button>
+                <button id="btn-submit-import" class="btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Management Drawer -->
+    <div id="activity-drawer" class="modal-overlay" style="display: none; justify-content: flex-end;">
+        <div class="modal-content" style="width: 400px; height: 100vh; margin: 0; border-radius: 0; display: flex; flex-direction: column; animation: slideInRight 0.3s ease-out;">
+            <div class="modal-header">
+                <h3>活动管理</h3>
+                <button class="close-btn close-activity-drawer">×</button>
+            </div>
+            <div class="modal-body" style="background: #f0f2f5; padding: 20px; flex: 1; overflow-y: auto;">
+                <div style="font-size: 13px; color: #1890ff; background: #e6f7ff; border: 1px solid #91d5ff; padding: 10px; border-radius: 4px; margin-bottom: 20px;">
+                    <i style="margin-right: 4px;">ℹ</i> 活动覆盖门店按导入的目标自动开点，晚间生效
+                </div>
+                <div id="activity-list-container">
+                    <!-- Activity items injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</div>
+</body>
+</html>
